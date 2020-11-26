@@ -1,4 +1,4 @@
-package com.bookshelf.model.container;
+package com.bookshelf.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -12,36 +12,29 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "files")
+@Table(name = "file_container")
 public class FileContainer {
 
-    @JsonIgnore
     @Id
+    @Column(name = "id")
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
     private String id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "type")
-    private String type;
-    @Column(name = "size")
-    private Long size;
+
+    @Column(name = "name")      private String name;
+    @Column(name = "type")      private String type;
+    @Column(name = "size")      private Long size;
 
     @JsonIgnore
     @Lob
     @Column(name = "data")
     private byte[] data;
 
+    @Column(name = "download_url")
     private String downloadUrl;
 
-    public FileContainer(String fileName, String fileType, long size, byte[] data)
-    {
-        this.name = fileName;
-        this.type = fileType;
-        this.size = size;
-        this.data = data;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
 }

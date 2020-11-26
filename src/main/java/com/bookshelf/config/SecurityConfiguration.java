@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 // import com.example.spring.repository.CustomUserDetailsService;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfiguration {
 
     @Bean
