@@ -1,5 +1,6 @@
-package com.bookshelf.model;
+package com.bookshelf.model.container;
 
+import com.bookshelf.model.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,6 @@ public class FileContainer {
     @Column(name = "data")
     private byte[] data;
 
-    @Column(name = "download_url")
     private String downloadUrl;
 
     @ManyToOne

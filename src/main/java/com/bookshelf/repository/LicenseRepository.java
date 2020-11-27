@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LicenseRepository extends JpaRepository<License, String> {
+
+    boolean existsByName(String name);
+
 }

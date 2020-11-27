@@ -40,7 +40,6 @@ create table comment (
 create table file_container (
     id varchar(255) not null,
     data longblob,
-    download_url varchar(255),
     name varchar(255),
     size bigint,
     type varchar(255),
@@ -63,7 +62,6 @@ create table license (
 create table photo_container (
     id varchar(255) not null,
     data longblob,
-    download_url varchar(255),
     name varchar(255),
     size bigint,
     type varchar(255),

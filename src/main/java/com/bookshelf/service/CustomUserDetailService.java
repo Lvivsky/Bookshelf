@@ -1,4 +1,4 @@
-package com.bookshelf.repository;
+package com.bookshelf.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
