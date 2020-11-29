@@ -9,7 +9,8 @@ public interface AccountService {
 
     List<Account> findAll();
 
-    Account findAccount(String id) throws EntityNotFoundException;
+    Account findById(String id) throws EntityNotFoundException;
+    Account findByEmail(String email) throws EntityNotFoundException;
 
     void save(Account account);
     void remove(String id);

@@ -1,32 +1,47 @@
 package com.bookshelf.config;
 
+import com.bookshelf.model.utils.Role;
+import com.bookshelf.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-// import com.example.spring.repository.CustomUserDetailsService;
-
-//@Configuration
-//@EnableWebSecurity
-public class SecurityConfiguration {
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public PasswordEncoder passwordEncoder()
-    {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    TODO: FINISH SECURITY CONFIGURATION
+    @Autowired
+    public void configAuthentication(
+            AuthenticationManagerBuilder builder,
+            @Autowired CustomUserDetailService customUserDetailService) throws Exception
+    {
+        builder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
+    }
 
-//    @Autowired
-//    public void configAuthentication(AuthenticationManagerBuilder builder, @Autowired CustomUserDetailsService customUserDetailsService) throws Exception
-//    {
-//        builder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-//    }
-
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests()
+                .antMatchers("/admin**").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/public/", "/public/**", "/anonymous").anonymous()
+                .antMatchers("/resources/**", "/registration", "/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login")
+                .and()
+                .logout().deleteCookies("JSESSIONID")
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
+    }
 }

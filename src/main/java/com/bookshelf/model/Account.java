@@ -1,6 +1,7 @@
 package com.bookshelf.model;
 
 import com.bookshelf.model.container.PhotoContainer;
+import com.bookshelf.model.utils.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

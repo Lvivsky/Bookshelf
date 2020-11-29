@@ -24,8 +24,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findAccount(String id) throws EntityNotFoundException {
+    public Account findById(String id) throws EntityNotFoundException {
         return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public Account findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     @Override
