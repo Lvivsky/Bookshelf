@@ -14,7 +14,7 @@
 
 <body>
 
-<h1>HELLO</h1>
+<h1>Registration page</h1>
 
 <script src="../resources/js/jquery.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
