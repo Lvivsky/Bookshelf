@@ -37,7 +37,7 @@ public class AccountController {
 
         service.save(account);
 
-        return "redirect:/welcome";
+        return "redirect:/store";
     }
 
     @GetMapping("/login")
@@ -54,18 +54,22 @@ public class AccountController {
         return "login";
     }
 
-    @GetMapping( {"/", "/welcome"})
+    @GetMapping( {"/", "/store"})
     public String welcome()
     {
-        return "welcome";
+        return "store";
     }
 
+    @GetMapping("/published")
+    public String published()
+    {
+        return "published";
+    }
 
-
-    @GetMapping("/anonymous")
+    @GetMapping("/library")
     public String anonymous()
     {
-        return "anonymous";
+        return "library";
     }
 
 
