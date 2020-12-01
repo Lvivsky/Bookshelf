@@ -29,23 +29,30 @@
                             <div class="cart-title">
                                 <h2>Login</h2>
                             </div>
-                            <form>
-                                <div class="row">
+
+
+                            <form method="POST" action="/login">
+                                <div class="row ${error != null ? 'has-error' : ''}">
+
+                                    <span>${message}</span>
                                     <div class="col-12 mb-3">
-                                        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                                        <input name="email" type="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <input type="password" class="form-control mb-3" id="street_address" placeholder="Password" value="">
+                                        <input name="password" type="password" class="form-control mb-3" placeholder="Password">
                                     </div>
+                                    <span>${error}</span>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 </div>
 
                                 <div class="cart-btn mt-10">
-                                    <button id="login" class="btn amado-btn w-100">Submit</button>
+                                    <button class="btn amado-btn w-100">Submit</button>
                                 </div>
                                 <div class="cart-btn mt-30">
-                                    <button id="toRegister" class="btn amado-btn w-100">Registration</button>
+                                    <a href="/registration" class="btn amado-btn w-100">Create an account</a>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

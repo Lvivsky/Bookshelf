@@ -4,12 +4,14 @@ import com.bookshelf.model.Account;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Log4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +26,7 @@ public class CustomAccountDetails extends Account implements UserDetails {
 
     @Override
     public String getUsername() {
+        log.info("Account details: get username -> " + this.getEmail());
         return this.getEmail();
     }
 

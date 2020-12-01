@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configAuthentication(
             AuthenticationManagerBuilder builder,
-            @Autowired CustomUserDetailService customUserDetailService) throws Exception
+            CustomUserDetailService customUserDetailService) throws Exception
     {
         builder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
     }
@@ -35,7 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                 .antMatchers("/admin**").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/public/", "/public/**", "/anonymous", "/store").anonymous()
-                .antMatchers("/resources/**", "/registration", "/login","/published","/library","account").permitAll()
+                .antMatchers("/resources/**", "/registration", "/login").permitAll()
+                .antMatchers("/library","/account","/published").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

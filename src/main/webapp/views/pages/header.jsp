@@ -51,7 +51,7 @@
     <nav class="amado-nav">
         <ul>
             <li>
-                <a href="#">
+                <a href="/account">
                 <c:if test="${not empty userEmail}">${userEmail}</c:if>
                 <c:if test="${empty userEmail}">Account</c:if>
                 </a>
