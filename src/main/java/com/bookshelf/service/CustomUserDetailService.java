@@ -24,15 +24,15 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        Account account = repository.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) {
+        Account account = repository.findByEmail(username);
 
         if (Objects.isNull(account)) {
-            log.error("No user with email: " + email);
-            throw new UsernameNotFoundException("No user with email: " + email);
+            log.error("No user with email: " + username);
+            throw new UsernameNotFoundException("No user with email: " + username);
         }
         else {
-            log.info("Username has found successful");
+            log.info("Login with email: " + username);
             return new CustomAccountDetails(account);
         }
 

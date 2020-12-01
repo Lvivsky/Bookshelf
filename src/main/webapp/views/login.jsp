@@ -36,7 +36,7 @@
 
                                     <span>${message}</span>
                                     <div class="col-12 mb-3">
-                                        <input name="email" type="email" class="form-control" placeholder="Email">
+                                        <input name="username" type="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <input name="password" type="password" class="form-control mb-3" placeholder="Password">
