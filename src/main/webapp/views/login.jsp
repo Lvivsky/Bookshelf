@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="cart-btn mt-10">
-                                    <button class="btn amado-btn w-100">Submit</button>
+                                    <button class="btn amado-btn w-100" type="submit">Submit</button>
                                 </div>
                                 <div class="cart-btn mt-30">
                                     <a href="/registration" class="btn amado-btn w-100">Create an account</a>

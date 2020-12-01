@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%-- Stile --%>
 <link rel="stylesheet" href="../../resources/css/core-style.css">
 <link rel="stylesheet" href="../../resources/css/style.css">
@@ -52,14 +56,22 @@
         <ul>
             <li>
                 <a href="/account">
-                <c:if test="${not empty userEmail}">${userEmail}</c:if>
-                <c:if test="${empty userEmail}">Account</c:if>
+                    <c:if test="${!empty pageContext.request.userPrincipal.name}">
+                        ${pageContext.request.userPrincipal.name}
+                    </c:if>
+                    <c:if test="${empty pageContext.request.userPrincipal.name}">
+                        Account
+                    </c:if>
                 </a>
             </li>
 
             <li><a href="/store">Store</a></li>
             <li><a href="/library">Library</a></li>
             <li><a href="/published">Published</a></li>
+
+            <c:if test="${!empty pageContext.request.userPrincipal.name}">
+                <li><a href="#">Log out</a></li>
+            </c:if>
 
 <%-- TODO:: ADMIN PANEL if ROLE = ADMIN:           --%>
 <%--            <li><a href="cart.html">admin panel</a></li>--%>

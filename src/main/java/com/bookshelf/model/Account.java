@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +33,7 @@ public class Account {
     private Date registrationDate;
     @Column(name = "role", nullable = false)
     private Role role;
+
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
@@ -39,7 +43,8 @@ public class Account {
     @Column(name = "phone", nullable = false)
     private String phone;
     @Column(name = "birthday", nullable = false)
-    private Date birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
 
     @OneToMany(mappedBy = "account")
     private Set<Book> books;

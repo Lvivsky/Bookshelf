@@ -26,13 +26,11 @@ public class CustomAccountDetails extends Account implements UserDetails {
 
     @Override
     public String getUsername() {
-        log.info("Account details: get username -> " + this.getEmail());
         return this.account.getEmail();
     }
 
     @Override
     public String getPassword() {
-        log.info("Getting password");
         return this.account.getPassword();
     }
 

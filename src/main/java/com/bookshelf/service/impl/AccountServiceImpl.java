@@ -20,7 +20,8 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository repository;
     private final PasswordEncoder passwordEncoder;
 
-    AccountServiceImpl(@Autowired AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
+    @Autowired
+    AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.repository = accountRepository;
         this.passwordEncoder = passwordEncoder;
     }

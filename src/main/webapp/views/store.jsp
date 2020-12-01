@@ -21,8 +21,9 @@
 <div class="main-content-wrapper d-flex clearfix">
     <jsp:include page="pages/header.jsp"></jsp:include>
 
+    <h1>Store</h1>
 
-
+    <h4>Some products</h4>
 
 
 

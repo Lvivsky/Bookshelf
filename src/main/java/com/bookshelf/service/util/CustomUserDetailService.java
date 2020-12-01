@@ -1,4 +1,4 @@
-package com.bookshelf.service;
+package com.bookshelf.service.util;
 
 import com.bookshelf.model.Account;
 import com.bookshelf.model.utils.CustomAccountDetails;
