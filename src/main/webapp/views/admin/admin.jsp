@@ -9,18 +9,17 @@
     <title>Bookshelf welcome</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="../resources/img/favicon.ico">
+    <link rel="icon" href="../../resources/img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="../resources/css/core-style.css">
-    <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/core-style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
 
 
 <div class="main-content-wrapper d-flex clearfix">
     <jsp:include page="../pages/header.jsp"></jsp:include>
-
 
         <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
@@ -31,28 +30,24 @@
                                 <h2>Admin panel</h2>
                             </div>
                             <div class="row">
-                                <div class="cart-btn mt-30">
-                                    <a href="/admin-genres" class="btn amado-btn w-100">Genres</a>
+                                <div class="col-md-6 mb-3">
+                                    <a href="/admin-orders" class="btn amado-btn form-control">Orders</a>
                                 </div>
-                                <div class="cart-btn mt-30">
-                                    <a href="/admin-genres" class="btn amado-btn w-100">Genres</a>
+                                <div class="col-md-6 mb-3">
+                                    <a href="/admin-accounts" class="form-control btn amado-btn">Accounts</a>
                                 </div>
-                                <div class="cart-btn mt-30">
-                                    <a href="/admin-genres" class="btn amado-btn w-100">Genres</a>
+                                <div class="col-md-6 mb-3">
+                                    <a href="/admin-books" class="form-control btn amado-btn">Books</a>
                                 </div>
-                                <div class="cart-btn mt-30">
-                                    <a href="/admin-genres" class="btn amado-btn w-100">Genres</a>
+                                <div class="col-md-6 mb-3">
+                                    <a href="/admin-genres" class="form-control btn amado-btn">Genres</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
 </div>
 
 
@@ -65,5 +60,7 @@
 <script src="../../resources/js/bootstrap.min.js"></script>
 <script src="../../resources/js/plugins.js"></script>
 <script src="../../resources/js/active.js"></script>
+<%-- Custom --%>
+<script src="../../resources/js/admin.js"></script>
 </body>
 </html>

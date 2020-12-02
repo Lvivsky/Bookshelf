@@ -56,12 +56,11 @@
         <ul>
             <li>
                 <a href="/account">
-                    <c:if test="${!empty pageContext.request.userPrincipal.name}">
-                        ${pageContext.request.userPrincipal.name}
-                    </c:if>
-                    <c:if test="${empty pageContext.request.userPrincipal.name}">
-                        Account
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${!empty pageContext.request.userPrincipal.name}">
+                            ${pageContext.request.userPrincipal.name}</c:when>
+                        <c:when test="${empty pageContext.request.userPrincipal.name}">Account</c:when>
+                    </c:choose>
                 </a>
             </li>
 
@@ -69,13 +68,16 @@
             <li><a href="/library">Library</a></li>
             <li><a href="/published">Published</a></li>
 
+
+<%--            <c:if test="${pageCo}">--%>
+<%--                <li><a href="/admin">Admin panel</a></li>--%>
+<%--            </c:if>--%>
+
+
+
             <c:if test="${!empty pageContext.request.userPrincipal.name}">
                 <li><a href="#">Log out</a></li>
             </c:if>
-
-<%-- TODO:: ADMIN PANEL if ROLE = ADMIN:           --%>
-<%--            <li><a href="cart.html">admin panel</a></li>--%>
-<%--            --%>
 
         </ul>
     </nav>

@@ -24,7 +24,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "admin";
+        return "admin/admin";
     }
 
     @GetMapping("/access-denied")
@@ -32,12 +32,24 @@ public class AdminController {
         return "access-denied";
     }
 
-    @GetMapping("/admin/genre")
-    public String genres(Model model) {
+    @GetMapping("/admin-genres")
+    public String adminGenres(Model model) {
         model.addAttribute("genres", genreService.findAll());
-        return "admin-genres";
+        return "admin/admin-genres";
     }
-
+    @GetMapping("/admin-books")
+    public String adminBooks(Model model) {
+        return "admin/admin-genres";
+    }
+    @GetMapping("/admin-orders")
+    public String adminOrders(Model model) {
+        return "admin/admin-orders";
+    }
+    @GetMapping("/admin-accounts")
+    public String adminAccounts(Model model) {
+        model.addAttribute("accounts", accountService.findAll());
+        return "admin/admin-accounts";
+    }
 
 
 }

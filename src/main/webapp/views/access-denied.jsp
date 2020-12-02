@@ -6,18 +6,36 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Log in with your account</title>
+    <title>Bookshelf welcome</title>
 
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../resources/css/common.css" rel="stylesheet">
+    <!-- Favicon  -->
+    <link rel="icon" href="../resources/img/favicon.ico">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="../resources/css/core-style.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
 </head>
-
 <body>
 
-<h1>Access denied</h1>
 
-<script src="../resources/js/jquery.min.js"></script>
+<div class="main-content-wrapper d-flex clearfix">
+    <jsp:include page="pages/header.jsp"></jsp:include>
+
+
+    <h1>Access denied :(</h1>
+
+
+</div>
+
+
+
+<jsp:include page="pages/footer.jsp"></jsp:include>
+
+<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+<script src="../resources/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="../resources/js/popper.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
-
+<script src="../resources/js/plugins.js"></script>
+<script src="../resources/js/active.js"></script>
 </body>
 </html>

@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin**").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/resources/**", "/registration", "/login", "/store").permitAll()
                 .antMatchers("/library","/account","/published","/create-book").hasAuthority(Role.USER.name())
+                .antMatchers("/library","/account","/published","/create-book").hasAuthority(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
