@@ -3,6 +3,7 @@ package com.bookshelf.controller;
 import com.bookshelf.exception.EntityNotFoundException;
 import com.bookshelf.model.Account;
 import com.bookshelf.model.Book;
+import com.bookshelf.model.License;
 import com.bookshelf.model.container.FileContainer;
 import com.bookshelf.model.container.PhotoContainer;
 import com.bookshelf.repository.BookRepository;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -31,18 +33,21 @@ public class AccountController {
     private final FileContainerService fileContainerService;
     private final PhotoContainerService photoContainerService;
     private final GenreService genreService;
+    private final LicenseService licenseService;
 
     @Autowired
     public AccountController(AccountService accountService,
                              BookService bookService,
                              FileContainerService fileContainerService,
                              PhotoContainerService photoContainerService,
-                             GenreService genreService) {
+                             GenreService genreService,
+                             LicenseService licenseService) {
         this.accountService = accountService;
         this.bookService = bookService;
         this.fileContainerService = fileContainerService;
         this.photoContainerService = photoContainerService;
         this.genreService = genreService;
+        this.licenseService = licenseService;
 
     }
 
@@ -65,7 +70,11 @@ public class AccountController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, String logout, String error) {
+    public String login(Model model, String logout, String error, Principal principal) {
+        if (principal != null) {
+            return "redirect:/account";
+        }
+
         log.info("Try to log in");
         if (error != null) {
             log.error("Email or password is not found!");
@@ -123,27 +132,53 @@ public class AccountController {
 
 
     @GetMapping( {"/", "/store"})
-    public String welcome()
-    {
+    public String welcome() {
         return "store";
     }
 
+    @SneakyThrows
     @GetMapping("/published")
-    public String published()
-    {
+    public String published(Model model, Principal principal) {
+
+        Account account = accountService.findByEmail(principal.getName());
+
+        if (account.getLicense() != null) {
+            License license = licenseService.findById(account.getLicense());
+            model.addAttribute("myLicense", license);
+            model.addAttribute("account", account);
+        }
+        else {
+            model.addAttribute("licenseList",licenseService.findAll());
+        }
         return "published";
     }
 
+    @SneakyThrows
     @GetMapping("/library")
-    public String library()
-    {
+    public String library(Model model, Principal principal) {
+
+        Account account = accountService.findByEmail(principal.getName());
+
+//        Book likedBooks = bookService.
+
+
         return "library";
     }
 
-    @GetMapping("/account")
-    public String account()
-    {
+    @SneakyThrows
+    @GetMapping("/account/{email}")
+    public String account(@PathVariable("email") String email, Model model) {
+        Account account = accountService.findByEmail(email);
+        PhotoContainer photos = photoContainerService.findByAccount(account);
+
+        model.addAttribute("account", account);
+        model.addAttribute("photos",photos);
         return "account";
+    }
+
+    @GetMapping("/account")
+    public String account() {
+        return "redirect:/store";
     }
 
 

@@ -1,6 +1,7 @@
 package com.bookshelf.service.impl;
 
 import com.bookshelf.exception.EntityNotFoundException;
+import com.bookshelf.model.Account;
 import com.bookshelf.model.container.PhotoContainer;
 import com.bookshelf.repository.PhotoContainerRepository;
 import com.bookshelf.service.PhotoContainerService;
@@ -36,5 +37,10 @@ public class PhotoContainerServiceImpl implements PhotoContainerService {
     @Override
     public PhotoContainer find(String id) throws EntityNotFoundException {
         return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public PhotoContainer findByAccount(Account account) {
+        return repository.findByAccount(account);
     }
 }

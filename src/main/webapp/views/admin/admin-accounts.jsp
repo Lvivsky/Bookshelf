@@ -26,44 +26,45 @@
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="checkout_details_area mt-50 clearfix">
+
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <a href="/admin" class="btn amado-btn form-control"><-</a>
                             </div>
                             <div class="cart-title col-md-6 mb-3">
-                                <h2>Admin panel</h2>
+                                <h2>Accounts</h2>
                             </div>
                         </div>
-                            <table style="font-size: 10px">
-                                <thead>
-                                    <td>
-                                        <th>Id</th>
-                                        <th>Register date</th>
-                                        <th>Email</th>
-                                        <th>Name</th>
-                                        <th>Birthday</th>
-                                        <th>Phone</th>
-                                        <th></th>
-                                    </td>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${accounts}" var="e">
-                                        <tr>
-                                            <td>${e.id}</td>
-                                            <td>${e.registrationDate}</td>
-                                            <td>${e.email}</td>
-                                            <td>${e.name}</td>
-                                            <td>${e.birthday}</td>
-                                            <td>${e.phone}</td>
-                                            <td>
-                                                <a href="#" class="text-warning">edit </a>
-                                                <a href="#" class="text-danger">delete</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
 
+                        <table style="font-size: 10px">
+                            <thead>
+                                <td>
+                                    <th>Id</th>
+                                    <th>Register date</th>
+                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Birthday</th>
+                                    <th>Phone</th>
+                                    <th></th>
+                                </td>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${accounts}" var="e">
+                                    <tr>
+                                        <td>${e.id}</td>
+                                        <td>${e.registrationDate}</td>
+                                        <td>${e.email}</td>
+                                        <td>${e.name}</td>
+                                        <td>${e.birthday}</td>
+                                        <td>${e.phone}</td>
+                                        <td>
+                                            <a href="#" class="text-warning">edit </a>
+                                            <a href="#" class="text-danger">delete</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>

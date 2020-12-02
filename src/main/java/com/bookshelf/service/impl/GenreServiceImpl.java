@@ -33,4 +33,9 @@ public class GenreServiceImpl implements GenreService {
     public List<Genre> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public boolean exist(String name) {
+        return repository.existsByNameIgnoreCase(name);
+    }
 }

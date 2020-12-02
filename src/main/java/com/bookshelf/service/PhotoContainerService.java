@@ -1,6 +1,7 @@
 package com.bookshelf.service;
 
 import com.bookshelf.exception.EntityNotFoundException;
+import com.bookshelf.model.Account;
 import com.bookshelf.model.container.PhotoContainer;
 
 public interface PhotoContainerService {
@@ -11,4 +12,6 @@ public interface PhotoContainerService {
     boolean exist(String id);
 
     PhotoContainer find(String id) throws EntityNotFoundException;
+
+    PhotoContainer findByAccount(Account account);
 }

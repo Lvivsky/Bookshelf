@@ -9,4 +9,6 @@ public interface LicenseRepository extends JpaRepository<License, String> {
 
     boolean existsByName(String name);
 
+    License findById(License id);
+
 }

@@ -55,28 +55,31 @@
     <nav class="amado-nav">
         <ul>
             <li>
-                <a href="/account">
-                    <c:choose>
-                        <c:when test="${!empty pageContext.request.userPrincipal.name}">
-                            ${pageContext.request.userPrincipal.name}</c:when>
-                        <c:when test="${empty pageContext.request.userPrincipal.name}">Account</c:when>
-                    </c:choose>
-                </a>
+                <c:choose>
+                    <c:when test="${!empty pageContext.request.userPrincipal.name}">
+                        <a href="${"/account/".concat(pageContext.request.userPrincipal.name)}">
+                                ${pageContext.request.userPrincipal.name}
+                        </a>
+                    </c:when>
+                    <c:when test="${empty pageContext.request.userPrincipal.name}">
+                        <a href="/account">Account</a>
+                    </c:when>
+                </c:choose>
             </li>
+
+            <c:if test="${pageContext.request.userPrincipal.name.equals('igor.lvivsky@gmail.com')}">
+                <li><a href="/admin">Admin</a></li>
+            </c:if>
 
             <li><a href="/store">Store</a></li>
             <li><a href="/library">Library</a></li>
             <li><a href="/published">Published</a></li>
 
-
-<%--            <c:if test="${pageCo}">--%>
-<%--                <li><a href="/admin">Admin panel</a></li>--%>
-<%--            </c:if>--%>
-
-
-
             <c:if test="${!empty pageContext.request.userPrincipal.name}">
-                <li><a href="#">Log out</a></li>
+                <form id="logoutForm" method="POST" action="/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+                <li><a style="cursor:pointer" onclick="document.forms['logoutForm'].submit()">Log out</a></li>
             </c:if>
 
         </ul>

@@ -11,4 +11,6 @@ public interface GenreService {
 
     List<Genre> findAll();
 
+    boolean exist(String name);
+
 }

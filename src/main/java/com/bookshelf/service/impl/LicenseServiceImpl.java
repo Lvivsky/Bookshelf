@@ -35,8 +35,8 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public License findById(String id) throws EntityNotFoundException {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    public License findById(License id) {
+        return repository.findById(id);
     }
 
     @Override
