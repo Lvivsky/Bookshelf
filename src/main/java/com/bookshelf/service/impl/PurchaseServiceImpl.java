@@ -1,6 +1,7 @@
 package com.bookshelf.service.impl;
 
 import com.bookshelf.exception.EntityNotFoundException;
+import com.bookshelf.model.Account;
 import com.bookshelf.model.Purchase;
 import com.bookshelf.repository.PurchaseRepository;
 import com.bookshelf.service.PurchaseService;
@@ -40,7 +41,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public List<Purchase> findAllByAccount(String accountId) {
-        return repository.findAllByAccountId(accountId);
+    public List<Purchase> findAllByAccount(Account account) {
+        return repository.findAllByAccount(account);
     }
 }

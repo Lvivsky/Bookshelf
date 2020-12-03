@@ -19,7 +19,7 @@
 
 
 <div class="main-content-wrapper d-flex clearfix">
-    <jsp:include page="pages/header.jsp"></jsp:include>
+    <jsp:include page="pages/header.jsp"/>
 
         <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
@@ -117,7 +117,7 @@
 
 
 
-<jsp:include page="pages/footer.jsp"></jsp:include>
+<jsp:include page="pages/footer.jsp"/>
 
 <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
 <script src="../resources/js/jquery/jquery-2.2.4.min.js"></script>

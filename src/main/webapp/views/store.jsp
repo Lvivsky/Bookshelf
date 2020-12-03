@@ -21,9 +21,31 @@
 <div class="main-content-wrapper d-flex clearfix">
     <jsp:include page="pages/header.jsp"></jsp:include>
 
-    <h1>Store</h1>
+    <div class="products-catagories-area clearfix">
+        <div class="amado-pro-catagory clearfix">
 
-    <h4>Some products</h4>
+            <c:forEach items="${books}" var="e">
+            <div class="single-products-catagory clearfix">
+                <a href="${'/book-page/'.concat(e.id)}">
+                    <img src="../resources/img/book-default.png" alt="book img">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <c:if test="${e.price == 0}">
+                            <p>Free</p>
+                        </c:if>
+                        <c:if test="${e.price != 0}">
+                            <p>From ${e.price}</p>
+                        </c:if>
+                        <h4>${e.title}</h4>
+                        <h6>${e.account.email}</h6>
+                    </div>
+                </a>
+            </div>
+            </c:forEach>
+
+        </div>
+    </div>
 
 
 

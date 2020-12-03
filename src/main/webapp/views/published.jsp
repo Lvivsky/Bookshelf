@@ -21,10 +21,6 @@
 <div class="main-content-wrapper d-flex clearfix">
     <jsp:include page="pages/header.jsp"></jsp:include>
 
-<%--                                <div class="cart-btn mt-10">--%>
-<%--                                    <a href="/create-book" class="btn amado-btn w-100">Add book</a>--%>
-<%--                                </div>--%>
-
     <div class="cart-table-area section-padding-100">
         <div class="container-fluid">
             <div class="row">
@@ -49,10 +45,11 @@
                             <c:forEach items="${books}" var="book">
                             <tr>
                                 <td class="cart_product_img">
-                                    <a href="#"><img src="img/bg-img/cart1.jpg" alt="Product"></a>
+                                    <a href="#"><img src="..." alt="Product"></a>
                                 </td>
                                 <td class="cart_product_desc">
-                                    <h5>${book.title}</h5>
+                                    <a href="${'/book-page/'.concat(book.id)}">
+                                    <h5>${book.title}</h5></a>
                                 </td>
                                 <td class="cart_product_desc">
                                     <span>${book.publishedDate}</span>
@@ -77,6 +74,9 @@
                         </ul>
                         <div class="cart-btn mt-100">
                             <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                        </div>
+                        <div class="cart-btn mt-100">
+                            <a href="/create-book" class="btn amado-btn w-100">Add book</a>
                         </div>
                     </div>
                 </div>

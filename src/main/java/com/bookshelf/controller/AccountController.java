@@ -6,6 +6,7 @@ import com.bookshelf.model.Book;
 import com.bookshelf.model.License;
 import com.bookshelf.model.container.FileContainer;
 import com.bookshelf.model.container.PhotoContainer;
+import com.bookshelf.model.utils.Role;
 import com.bookshelf.repository.BookRepository;
 import com.bookshelf.service.*;
 import lombok.SneakyThrows;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Log4j
@@ -34,6 +38,7 @@ public class AccountController {
     private final PhotoContainerService photoContainerService;
     private final GenreService genreService;
     private final LicenseService licenseService;
+    private final PurchaseService purchaseService;
 
     @Autowired
     public AccountController(AccountService accountService,
@@ -41,14 +46,15 @@ public class AccountController {
                              FileContainerService fileContainerService,
                              PhotoContainerService photoContainerService,
                              GenreService genreService,
-                             LicenseService licenseService) {
+                             LicenseService licenseService,
+                             PurchaseService purchaseService) {
         this.accountService = accountService;
         this.bookService = bookService;
         this.fileContainerService = fileContainerService;
         this.photoContainerService = photoContainerService;
         this.genreService = genreService;
         this.licenseService = licenseService;
-
+        this.purchaseService = purchaseService;
     }
 
     @GetMapping("/registration")
@@ -92,47 +98,52 @@ public class AccountController {
         return "store";
     }
 
-
-
     @GetMapping("/create-book")
     public String creteBook(Model model) {
-        model.addAttribute("genres", genreService.findAll());
+        model.addAttribute("bookForm", new Book());
         return "addbook";
     }
 
     @SneakyThrows
     @PostMapping("/create-book")
-    public String createBook(@ModelAttribute("bookForm") Book book,
-                             @ModelAttribute("photoForm") PhotoContainer photoContainer,
-                             @ModelAttribute("fileForm") FileContainer fileContainer,
-                             BindingResult bindingResult,
-                             Principal user) {
-
+    public String createBook(@ModelAttribute("bookForm") Book book, Principal principal) {
         log.info("Try to add book");
-        if (bindingResult.hasErrors()) {
-            log.error("Add book fail!");
-            return "addbook";
+        Account account = accountService.findByEmail(principal.getName());
+
+        if (!account.getRole().name().equals(Role.ADMIN.name())) {
+            if (account.getLicense() == null) {
+                log.error("License not found!");
+                return "redirect:/published";
+            }
+        }
+        License license = licenseService.findById(account.getLicense());
+
+        if (!account.getRole().name().equals(Role.ADMIN.name())) {
+            if (purchaseService.findAllByAccount(account).size() > license.getBookLimit()) {
+                log.error("License limit error");
+                return "redirect:/published";
+            }
         }
 
-        Account author = accountService.findByEmail(user.getName());
-        book.setAccount(author);
-        photoContainer.setBook(book);
-        fileContainer.setBook(book);
+        book.setPublishedDate(new Date(System.currentTimeMillis()));
+        book.setAccount(account);
 
-
-
+        log.info("Add new book: " + book.toString());
         bookService.save(book);
-        photoContainerService.add(photoContainer);
-        fileContainerService.add(fileContainer);
 
-        return "library";
+        return "redirect:/published";
     }
+    // TODO: do redirect to book page
 
 
 
 
     @GetMapping( {"/", "/store"})
-    public String welcome() {
+    public String welcome(Model model) {
+
+
+        model.addAttribute("books", bookService.findAll());
+
         return "store";
     }
 
@@ -142,25 +153,31 @@ public class AccountController {
 
         Account account = accountService.findByEmail(principal.getName());
 
-        if (account.getLicense() != null) {
-            License license = licenseService.findById(account.getLicense());
-            model.addAttribute("myLicense", license);
-            model.addAttribute("account", account);
-        }
-        else {
-            model.addAttribute("licenseList",licenseService.findAll());
-        }
+        List<Book> bookList = bookService.findAllByAuthor(account);
+
+        model.addAttribute("books", bookList);
         return "published";
     }
+
+    @SneakyThrows
+    @GetMapping("/book-page/{id}")
+    public String bookPage(@PathVariable("id") String id , Model model) {
+
+        Book book = bookService.findById(id);
+        Account account = book.getAccount();
+
+        model.addAttribute("book", book);
+        model.addAttribute("account", account);
+
+        return "book-page";
+    }
+
 
     @SneakyThrows
     @GetMapping("/library")
     public String library(Model model, Principal principal) {
 
         Account account = accountService.findByEmail(principal.getName());
-
-//        Book likedBooks = bookService.
-
 
         return "library";
     }
